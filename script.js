@@ -15,25 +15,32 @@ for (let i = 1; i <= 100; i++) {
 
 console.log(num);
 
-//1 ~ 50 369 -> 짝 33 36 39 -> 짝짝
+//숫자를 10으로 나누면 가장 오른쪽 숫자를 버릴 수 있다!
+//자리수에 3,6,9 포함되면 count++
+//count 갯수만큼 짝 출력
+//count가 0이면 숫자 출력
+function search(number){
+  let count = 0;
+  while(number > 0){
+    const TSN = number % 10;
+    if(TSN === 3 || TSN === 6 || TSN === 9){
+      count++;
+    }
+    number = Math.floor(number / 10);
+  }
+  return count;
+}
 
-for (let i = 1; i <= 50; i++) {
-  if (Math.floor(i / 10) === 3) {
-    // 10의 자리가 3과 3이 아닌것으로 분류류
-    //10의 자리가 3일때 369면 짝짝 아니면 짝
-    if (i % 10 === 3 || i % 10 === 6 || i % 10 === 9) {
-      console.log(i, "짝짝");
-    } else {
-      console.log(i, "짝");
+for(let i = 1; i < 1000; i++){
+  const count = search(i);
+  if(count > 0){
+    let result = "";
+    for(let j = 0; j < count; j++){
+      result += "짝";
     }
-  } else {
-    //10의 자리가 3이 아닌 숫자
-    //369면 짝 아니면 i
-    if (i % 10 === 3 || i % 10 === 6 || i % 10 === 9) {
-      console.log(i, "짝");
-    } else {
-      console.log(i);
-    }
+    console.log(i, result);
+  }else{
+    console.log(i);
   }
 }
 
@@ -41,12 +48,15 @@ for (let i = 1; i <= 50; i++) {
 let prime = (number) => {
   if (number === 1) {
     console.log("1은 소수가 아니다");
+    return;
   }
   else if (number === 2){
     console.log("2는 소수다");
+    return;
   }
   else if (number % 2 === 0){
     console.log("2보다 큰 짝수는 소수가 아니다.");
+    return;
   }
 
   const sqrt = Math.sqrt(number);
